@@ -24,7 +24,7 @@
     <!-- Content header BEGIN -->
     <div class="col-md-12">
       <div class="col-md-6">
-        <h2>Users</h2>
+        <h3>Users</h3>
       </div>
       <div class="col-md-6">
           <button type="submit" class="btn btn-lg btn-default">Add user</button>
@@ -32,9 +32,9 @@
       </div>
     </div>
     <!-- Content header END -->
-    
+
     <!-- Content user list BEGIN -->
-    <div class="col-md-6" id="user_list">
+    <!--<div class="col-md-6" id="user_list">
       <div class="col-md-12">
         <div class="col-md-6">
           <p>Username</p>
@@ -45,7 +45,7 @@
       </div>
       <div class="col-md-12" v-for="(role, count) in get_roles">
         <h4>{{ role }} ({{ count }})</h4>
-        <div class="user-list-row" v-for="user in users | filterBy role in 'role'">
+        <div v-for="user in users | filterBy role in 'role'">
           <div class="col-md-6">
             <p>{{ user.username }}</p>
           </div>
@@ -58,20 +58,41 @@
         </div>
       </div>
     </div>
-    
+    -->
+
+    <div class="col-md-6">
+      <table class="table" id="user_list"> 
+        <thead> 
+          <tr> 
+            <th>Username</th> 
+            <th>Last active</th> 
+          </tr> 
+        </thead>
+        <tbody v-for="(role, count) in get_roles">
+          <tr>
+            <td><strong>{{ role }} ({{ count }})</strong></td>
+          </tr>
+          <tr v-for="user in users | filterBy role in 'role'"> 
+            <td>{{ user.username }}</td> 
+            <td v-if="user.is_active">{{ user.last_login }}</td>
+            <td v-else>Disabled</td>
+          </tr> 
+        </tbody>
+      </table>
+    </div>
     <!-- Content user list END -->
 
     <!-- Content user form BEGIN -->
     <div class="col-md-6">
       <form class="form-horizontal">
         <div class="form-group">
-          <label for="inputPassword3" class="col-sm-2 control-label">Username</label>
-          <div class="col-sm-10">
+          <label for="inputPassword3" class="col-sm-3 control-label">Username</label>
+          <div class="col-sm-8">
             <input type="text" class="form-control" placeholder="username@domain.com">
           </div>
         </div>
         <div class="form-group">
-          <label for="inputPassword3" class="col-sm-2 control-label">Role</label>
+          <label for="inputPassword3" class="col-sm-3 control-label">Role</label>
           <div class="col-sm-4">
             <select class="form-control">
               <option>Manager</option>
@@ -81,19 +102,19 @@
           </div>
         </div>
         <div class="form-group">
-          <label for="inputPassword3" class="col-sm-2 control-label">First name</label>
-          <div class="col-sm-10">
+          <label for="inputPassword3" class="col-sm-3 control-label">First name</label>
+          <div class="col-sm-8">
             <input type="text" class="form-control" id="inputPassword3" placeholder="Password">
           </div>
         </div>
         <div class="form-group">
-          <label for="inputPassword3" class="col-sm-2 control-label">Last name</label>
-          <div class="col-sm-10">
+          <label for="inputPassword3" class="col-sm-3 control-label">Last name</label>
+          <div class="col-sm-8">
             <input type="text" class="form-control" id="inputPassword3" placeholder="Password">
           </div>
         </div>
         <div class="form-group">
-          <label for="inputPassword3" class="col-sm-2 control-label">Status</label>
+          <label for="inputPassword3" class="col-sm-3 control-label">Status</label>
           <div class="col-sm-4">
             <select class="form-control">
               <option>Active</option>
@@ -102,8 +123,8 @@
           </div>
         </div>
         <div class="form-group">
-          <label for="inputPassword3" class="col-sm-2 control-label">Last login</label>
-          <label for="inputPassword3" class="col-sm-2 control-label">date here</label>
+          <label for="inputPassword3" class="col-sm-3 control-label">Last login</label>
+          <label for="inputPassword3" class="col-sm-4 control-label" style="text-align: left;">date here</label>
         </div>
         <div class="form-group">
           <div class="col-sm-6">
