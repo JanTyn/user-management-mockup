@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>title here</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <!--<link href="css/bootstrap.min.css" rel="stylesheet" media="screen">-->
+
+    <script src="http://code.jquery.com/jquery.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <!--<script src="js/bootstrap.min.js"></script>-->
+    <script src="https://npmcdn.com/vue/dist/vue.js"></script>
+    <!--<script src="js/vue.js"></script>-->
+
+  </head>
+  <body>
+    <!-- Content header BEGIN -->
+    <div>
+      <h2>Users</h2>
+      <span>Add user</span>
+    </div>
+    <!-- Content header END -->
+
+    <!-- Content user list BEGIN -->
+    <div id="user_list">
+      <div class="user-list-row">
+        <div class="user-list-column">
+          <p>Username</p>
+        </div>
+        <div class="user-list-column">
+          <p>Active</p>
+        </div>
+      </div>
+      <div class="user-list-row-role" v-for="(role, count) in get_roles">
+        <h3>{{ role }} ({{ count }})</h3>
+        <div class="user-list-row" v-for="user in users | filterBy role in 'role'">
+          <div class="user-list-column">
+            <p>{{ user.username }}</p>
+          </div>
+          <div class="user-list-column active" v-if="user.is_active">
+            <p>{{ user.last_login }}</p>
+          </div>
+          <div class="user-list-column disabled" v-else>
+            <p>disabled</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Content user list END -->
+
+    <!-- Content user form BEGIN -->
+    <div id= "user_form">
+      <div class="user-form-row">
+        <h3>Jane Doe</h3>
+      </div>
+      <div class="user-form-row">
+        <p>Username</p>
+        <input type="text" value="edit me">
+      </div>
+      <div class="user-form-row">
+        <p>Role</p>
+        <select v-model="selected">
+          <option selected>A</option>
+          <option>B</option>
+          <option>C</option>
+        </select>
+      </div>
+      <div class="user-form-row">
+        <p>First name</p>
+        <input type="text" value="edit me">
+      </div>
+      <div class="user-form-row">
+        <p>Last name</p>
+        <input type="text" value="edit me">
+      </div>
+      <div class="user-form-row">
+        <p>Status</p>
+        <select v-model="selected">
+          <option selected>A</option>
+          <option>B</option>
+        </select>
+      </div>
+      <div class="user-form-row">
+        <p>Last login</p>
+        <p>date here</p>
+      </div>
+      <div class="user-form-row">
+        <span>Delete</span>
+        <span>Reset Password</span>
+        <span>Save</span>
+      </div>
+    </div>
+    <!-- Content user form END -->
+    <script src="js/controller.js"></script>
+  </body>
+</html>
